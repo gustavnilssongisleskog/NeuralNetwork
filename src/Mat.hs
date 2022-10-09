@@ -7,7 +7,6 @@ type Matrix = [[Double]]
 
 matMul :: Matrix -> Matrix -> Matrix
 matMul xss yss = map (\xs -> map (dotProduct xs) (transpose yss)) xss
---matMul xss yss = [[dotProduct (xss !! (i - 1)) [yss !! (k - 1) !! (j - 1) | k <- [1..(length yss)]] | j <- [1..(length $ head yss)] ] | i <- [1..(length xss)] ]
 
 matAdd :: Matrix -> Matrix -> Matrix
 matAdd = zipWith $ zipWith (+)
@@ -21,7 +20,6 @@ matrixSigmoid = matMap sigmoid
 transpose :: Matrix -> Matrix
 transpose ([]:_) = []
 transpose xss = map head xss : transpose (map tail xss)
---transpose xss = [[xss !! (i - 1) !! (j - 1) | i <- [1..(length xss)]] | j <- [1..(length $ head xss)]]
 
 vectorToMatrix :: Vector -> Matrix
 vectorToMatrix = map singleton

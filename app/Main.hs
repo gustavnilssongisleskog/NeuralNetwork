@@ -25,10 +25,6 @@ main = do
 
     putStrLn "Hello"
 
-    --saveNewParameters "C:\\Users\\ggisl\\Desktop\\Haskell\\NeuralNetwork\\parameters\\div\\0.txt" 
-    --improveFromFileToFile "C:\\Users\\ggisl\\Desktop\\Haskell\\NeuralNetwork\\parameters\\div\\19.txt" "C:\\Users\\ggisl\\Desktop\\Haskell\\NeuralNetwork\\parameters\\div\\20.txt" 
-    --testFile "C:\\Users\\ggisl\\Desktop\\Haskell\\NeuralNetwork\\parameters\\several\\0.txt"
-
     superNetwork "several" 3
 
     putStrLn "Goodbye"
@@ -36,7 +32,6 @@ main = do
 saveNewParameters :: FilePath -> IO ()
 saveNewParameters f = do
     (w,b) <- randomEverything [784,16,16,10]
-    --(w,b) <- randomWeightsZeroBiases [784,16,16,10]
     saveParametersToFile f (w,b)
 
 improveFromFileToFile :: FilePath -> FilePath -> IO ()
@@ -69,7 +64,7 @@ superNetwork subDirectory numEpochs = do
     testImages <- imagesFromFile testImagePath
     testCorrects <- labelsFromFile testLabelPath
 
-    newTrained ("C:\\Users\\ggisl\\Desktop\\Haskell\\NeuralNetwork\\parameters\\" ++ subDirectory ++ "\\") numEpochs trainImages trainCorrects testImages testCorrects
+    newTrained ("C:\\Users\\ggisl\\Desktop\\Haskell\\NeuralNetwork\\networks\\" ++ subDirectory ++ "\\") numEpochs trainImages trainCorrects testImages testCorrects
 
 newTrained :: FilePath -> Int -> [Matrix] -> [Int] -> [Matrix] -> [Int] -> IO ()
 newTrained directory numEpochs trainImages trainCorrects testImages testCorrects = do

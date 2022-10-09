@@ -25,8 +25,6 @@ outputManyExamples _ _ _ = []
 
 cost :: Matrix -> Int -> [Matrix] -> [Matrix] -> Double
 cost inp correct weights biases = sum $ zipWith (((^2) .) . (-)) [if j == correct then 1 else 0 | j <- [0..9]] (last $ activations inp weights biases)
---zipWith (((^2) .) . (-)) [if j == correct then 1 else 0 | j <- [0..9]]
 
 costManyExamples :: [Matrix] -> [Int] -> [Matrix] -> [Matrix] -> Double
---costManyExamples inps corrects weights biases = sum [cost (inps !! i) (corrects !! i) weights biases | i <- [0..length inps - 1]] / fromIntegral (length inps)
 costManyExamples inps corrects weights biases = sum (zipWith (\inp correct -> cost inp correct weights biases) inps corrects) / fromIntegral (length inps)

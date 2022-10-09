@@ -20,23 +20,5 @@ labelsFromFile = (return . labels . byteStringToList) <=< B.readFile
 imagesFromFile :: String -> IO [Matrix]
 imagesFromFile = (return . images . byteStringToList) <=< B.readFile
 
--- randomInts :: Int -> Int -> IO [Int]
--- randomInts n maxNum = mapM (return . flip mod maxNum <=< const randomIO) [1..n]
-
--- choose :: [Int] -> [a] -> [a]
--- choose (i:is) xs = xs !! i : choose is xs
--- choose _ _ = []
-
--- randomData :: Int -> [Matrix] -> [Int] -> IO [(Matrix, Int)]
--- randomData n imgs labels = do
---     idxs <- randomInts n (length labels)
---     let chosenLabels = choose idxs labels
---     let chosenImgs = choose idxs imgs
-
---     return $ zip chosenImgs chosenLabels
-
--- manyBatches :: Int -> Int -> [Matrix] -> [Int]-> IO [[(Matrix, Int)]]
--- manyBatches batches batchSize imgs labels = replicateM batches (randomData batchSize imgs labels)
-
 randomEpoch :: [Matrix] -> [Int] -> IO [[(Matrix, Int)]]
 randomEpoch =  ((fmap $ partitionPieceLength 100) .) . (shuffle .) . zip

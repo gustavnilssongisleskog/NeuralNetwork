@@ -23,8 +23,6 @@ randomWeightsOneLayer l1 l2 = do
     return (partitionPieceLength l1 ws)
 
 zeroBiases :: [Int] -> [Matrix]
---zeroBiases (_:l2:ls) = vectorToMatrix (replicate l2 0) : zeroBiases (l2:ls)
---zeroBiases _ = []
 zeroBiases = map (vectorToMatrix . flip replicate 0) . tail
 
 randomBiases :: [Int] -> IO [Matrix]
@@ -43,10 +41,6 @@ randomEverything ls = do
     return (w,b)
 
 parametersFromFile :: FilePath -> IO ([Matrix], [Matrix])
--- parametersFromFile f = do
---     contents <- readFile f
---     let wb = read contents :: ([Matrix], [Matrix])
---     return wb
 parametersFromFile = (return . read) <=< readFile
 
 saveParametersToFile :: FilePath -> ([Matrix], [Matrix]) -> IO ()
