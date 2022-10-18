@@ -25,6 +25,7 @@ dependencies:
 - random
 - deepseq
 - rando
+- ghc
 
 ghc-options:
 - -Wall

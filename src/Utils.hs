@@ -1,8 +1,11 @@
 {-# OPTIONS_GHC -Wno-missing-export-lists #-}
 module Utils where
+import Data.List (singleton)
+import GHC.Utils.Misc (last2)
 
 mapTuple :: (a -> b) -> (a, a) -> (b, b)
-mapTuple f (a, b) = (f a, f b)
+--mapTuple f (a, b) = (f a, f b)
+mapTuple = flip $ (last2 .) . flip map . uncurry (++) . unzip . singleton
 
 sigmoid :: Double -> Double
 sigmoid = (1/) . (1+) . exp . negate
