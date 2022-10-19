@@ -6,7 +6,8 @@ type Vector = [Double]
 type Matrix = [[Double]]
 
 matMul :: Matrix -> Matrix -> Matrix
-matMul xss yss = map (\xs -> map (dotProduct xs) (transpose yss)) xss
+--matMul xss yss = map (\xs -> map (dotProduct xs) (transpose yss)) xss
+matMul = flip $ map . flip (flip (flip map . transpose) . dotProduct)
 
 matAdd :: Matrix -> Matrix -> Matrix
 matAdd = zipWith $ zipWith (+)
